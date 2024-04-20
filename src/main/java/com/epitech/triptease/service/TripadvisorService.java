@@ -138,4 +138,54 @@ public class TripadvisorService {
         return locationDTO;
     }
 
+    public LocationPhotosDTO getLocationPhotosById(String locationId) {
+
+        String apiUrl = String.format("%s%s/photos?key=%s&language=fr",
+                tripAdvisorGetLocationUrl,
+                locationId,
+                tripAdvisorApiKey);
+        System.out.println(apiUrl);
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+
+        // Make the API call
+        ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+
+        // Parse JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        LocationPhotosDTO locationPhotosDTO = new LocationPhotosDTO();
+        try {
+            locationPhotosDTO = objectMapper.readValue(responseEntity.getBody(), LocationPhotosDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return locationPhotosDTO;
+    }
+
+    public LocationReviewsDTO getLocationReviewsById(String locationId) {
+
+        String apiUrl = String.format("%s%s/reviews?language=fr&key=%s",
+                tripAdvisorGetLocationUrl,
+                locationId,
+                tripAdvisorApiKey);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+
+        // Make the API call
+        ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+
+        // Parse JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        LocationReviewsDTO locationReviewsDTO = new LocationReviewsDTO();
+        try {
+            locationReviewsDTO = objectMapper.readValue(responseEntity.getBody(), LocationReviewsDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return locationReviewsDTO;
+    }
+
 }

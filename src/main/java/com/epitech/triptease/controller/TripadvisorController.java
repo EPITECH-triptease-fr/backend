@@ -1,10 +1,6 @@
 package com.epitech.triptease.controller;
 
-import com.epitech.triptease.mapper.dto.FlightFilterDTO;
-import com.epitech.triptease.mapper.dto.FlightOfferResponseDTO;
-import com.epitech.triptease.mapper.dto.LocationResponseDTO;
-import com.epitech.triptease.mapper.dto.LocationDTO;
-import com.epitech.triptease.mapper.dto.TripAdvisorFilterDTO;
+import com.epitech.triptease.mapper.dto.*;
 import com.epitech.triptease.service.TripadvisorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +29,17 @@ public class TripadvisorController {
     @PostMapping("/getLocation/{locationId}")
     public LocationDTO getLocationById(@PathVariable(value = "locationId") String locationId) {
         return tripadvisorService.getLocationById(locationId);
+    }
+
+    @GetMapping("/getLocationPhotos/{locationId}")
+    public LocationPhotosDTO getLocationPhotosById(@PathVariable(value = "locationId") String locationId) throws Exception {
+
+        return tripadvisorService.getLocationPhotosById(locationId);
+    }
+
+    @GetMapping("/getLocationReviews/{locationId}")
+    public LocationReviewsDTO getLocationReviewsById(@PathVariable(value = "locationId") String locationId) throws Exception {
+
+        return tripadvisorService.getLocationReviewsById(locationId);
     }
 }
