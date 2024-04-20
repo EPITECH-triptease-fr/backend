@@ -32,14 +32,12 @@ public class TripadvisorController {
     }
 
     @GetMapping("/getLocationPhotos/{locationId}")
-    public LocationPhotosDTO getLocationPhotosById(@PathVariable(value = "locationId") String locationId) throws Exception {
-
+    public LocationPhotosDTO getLocationPhotosById(@PathVariable(value = "locationId") String locationId) {
         return tripadvisorService.getLocationPhotosById(locationId);
     }
 
     @GetMapping("/getLocationReviews/{locationId}")
-    public LocationReviewsDTO getLocationReviewsById(@PathVariable(value = "locationId") String locationId) throws Exception {
-
+    public LocationReviewsDTO getLocationReviewsById(@PathVariable(value = "locationId") String locationId) {
         return tripadvisorService.getLocationReviewsById(locationId);
     }
 }
