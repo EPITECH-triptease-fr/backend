@@ -39,7 +39,7 @@ class LocationPhotosDTOTest {
     }
 
     @Test
-    public void testImagesGetterAndSetter() {
+    void testImagesGetterAndSetter() {
         Images images = new Images();
         images.setThumbnail(new Image());
         images.setSmall(new Image());
@@ -55,7 +55,7 @@ class LocationPhotosDTOTest {
     }
 
     @Test
-    public void testImageGetterAndSetter() {
+    void testImageGetterAndSetter() {
         Image image = new Image();
         image.setHeight(100);
         image.setWidth(200);
@@ -67,7 +67,7 @@ class LocationPhotosDTOTest {
     }
 
     @Test
-    public void testSourceGetterAndSetter() {
+    void testSourceGetterAndSetter() {
         Source source = new Source();
         source.setName("User123");
         source.setLocalized_name("User123");

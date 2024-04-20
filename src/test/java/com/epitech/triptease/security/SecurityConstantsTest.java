@@ -7,27 +7,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SecurityConstantsTest {
 
     @Test
-    public void testRoleUserConstant() {
+    void testRoleUserConstant() {
         assertEquals("ROLE_USER", SecurityConstants.ROLE_USER);
     }
 
     @Test
-    public void testRoleAdminConstant() {
+    void testRoleAdminConstant() {
         assertEquals("ROLE_ADMIN", SecurityConstants.ROLE_ADMIN);
     }
 
     @Test
-    public void testJwtRolesNamespaceConstant() {
+    void testJwtRolesNamespaceConstant() {
         assertEquals("role", SecurityConstants.JWT_ROLES_NAMESPACE);
     }
 
     @Test
-    public void testTokenMailConstant() {
+    void testTokenMailConstant() {
         assertEquals("mail", SecurityConstants.TOKEN_MAIL);
     }
 
     @Test
-    public void testTokenIdConstant() {
+    void testTokenIdConstant() {
         assertEquals("id", SecurityConstants.TOKEN_ID);
     }
 }

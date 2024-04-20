@@ -27,7 +27,7 @@ class GoogleOAuth2UserInfoExtractorTest {
     }
 
     @Test
-    public void testExtractUserInfo_SuccessfulExtraction() {
+    void testExtractUserInfo_SuccessfulExtraction() {
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("email", "test@example.com");
         attributes.put("name", "Test User");
