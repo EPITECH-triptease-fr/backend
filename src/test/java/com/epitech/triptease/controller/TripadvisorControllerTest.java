@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
@@ -22,7 +23,7 @@ class TripadvisorControllerTest {
     private TripadvisorController tripadvisorController;
 
     @Test
-    public void testGetFlightByCriteria() {
+    void testGetFlightByCriteria() {
         FlightFilterDTO flightFilterDTO = new FlightFilterDTO();
         String accessToken = "test_access_token";
         FlightOfferResponseDTO expectedResponse = new FlightOfferResponseDTO();
@@ -35,7 +36,17 @@ class TripadvisorControllerTest {
     }
 
     @Test
-    public void testGetLocationByCriteria() {
+    void testGetFlightByCriteriaWithNullToken() {
+        FlightFilterDTO flightFilterDTO = new FlightFilterDTO();
+        when(tripadvisorService.getAmadeusToken()).thenReturn(null);
+
+        FlightOfferResponseDTO response = tripadvisorController.getFlightByCriteria(flightFilterDTO);
+
+        assertNull(response);
+    }
+
+    @Test
+    void testGetLocationByCriteria() {
         TripAdvisorFilterDTO tripAdvisorFilterDTO = new TripAdvisorFilterDTO();
         LocationResponseDTO expectedResponse = new LocationResponseDTO();
         when(tripadvisorService.getLocationByCriteria(any(TripAdvisorFilterDTO.class))).thenReturn(expectedResponse);
@@ -46,12 +57,34 @@ class TripadvisorControllerTest {
     }
 
     @Test
-    public void testGetLocationById() {
+    void testGetLocationById() {
         String locationId = "test_location_id";
         LocationDTO expectedResponse = new LocationDTO();
         when(tripadvisorService.getLocationById(eq(locationId))).thenReturn(expectedResponse);
 
         LocationDTO response = tripadvisorController.getLocationById(locationId);
+
+        assertEquals(expectedResponse, response);
+    }
+
+    @Test
+    void testGetLocationPhotosById() {
+        String locationId = "test_location_id";
+        LocationPhotosDTO expectedResponse = new LocationPhotosDTO();
+        when(tripadvisorService.getLocationPhotosById(eq(locationId))).thenReturn(expectedResponse);
+
+        LocationPhotosDTO response = tripadvisorController.getLocationPhotosById(locationId);
+
+        assertEquals(expectedResponse, response);
+    }
+
+    @Test
+    void testGetLocationReviewsById() {
+        String locationId = "test_location_id";
+        LocationReviewsDTO expectedResponse = new LocationReviewsDTO();
+        when(tripadvisorService.getLocationReviewsById(eq(locationId))).thenReturn(expectedResponse);
+
+        LocationReviewsDTO response = tripadvisorController.getLocationReviewsById(locationId);
 
         assertEquals(expectedResponse, response);
     }

@@ -33,10 +33,9 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 determineTargetUrl(request, response, authentication) : redirectUri;
 
         String token = tokenProvider.generateJwtToken(authentication);
-        // Set the token in a cookie
         Cookie tokenCookie = new Cookie("token", token);
-        tokenCookie.setMaxAge(3600); // Set the cookie expiration time (in seconds)
-        tokenCookie.setPath("/"); // Set the cookie path to be accessible across the entire domain
+        tokenCookie.setMaxAge(3600);
+        tokenCookie.setPath("/");
         response.addCookie(tokenCookie);
 
         getRedirectStrategy().sendRedirect(request, response, targetUrl);

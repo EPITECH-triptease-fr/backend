@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FlightFilterDTOTest {
 
     @Test
-    public void testFlightFilterDTO() {
+    void testFlightFilterDTO() {
         FlightFilterDTO flightFilterDTO = new FlightFilterDTO();
         flightFilterDTO.setOriginLocationCode("Origin");
         flightFilterDTO.setDestinationLocationCode("Destination");

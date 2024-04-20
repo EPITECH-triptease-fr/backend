@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TripAdvisorFilterDTOTest {
 
     @Test
-    public void testTripAdvisorFilterDTO() {
+    void testTripAdvisorFilterDTO() {
         TripAdvisorFilterDTO tripAdvisorFilterDTO = new TripAdvisorFilterDTO();
         tripAdvisorFilterDTO.setSearchQuery("New York");
         tripAdvisorFilterDTO.setCategory("Hotels");

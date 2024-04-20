@@ -27,12 +27,12 @@ public class TripadvisorServiceTest {
     private TripadvisorService tripadvisorService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void testGetFlightsByCriteria() throws JsonProcessingException {
+    void testGetFlightsByCriteria() throws JsonProcessingException {
         FlightFilterDTO flightFilterDTO = new FlightFilterDTO();
         flightFilterDTO.setOriginLocationCode("LAX");
         flightFilterDTO.setDestinationLocationCode("JFK");
@@ -53,7 +53,7 @@ public class TripadvisorServiceTest {
 
 
     @Test
-    public void testGetAmadeusToken() {
+    void testGetAmadeusToken() {
         String expectedToken = "test_token";
         ResponseEntity<Map> responseEntity = ResponseEntity.ok().body(Collections.singletonMap("access_token", expectedToken));
         when(restTemplate.postForEntity(any(String.class), any(HttpEntity.class), eq(Map.class))).thenReturn(responseEntity);
@@ -64,7 +64,7 @@ public class TripadvisorServiceTest {
     }
 
     @Test
-    public void testGetLocationByCriteria() throws JsonProcessingException {
+    void testGetLocationByCriteria() throws JsonProcessingException {
         TripAdvisorFilterDTO tripAdvisorFilterDTO = new TripAdvisorFilterDTO();
         tripAdvisorFilterDTO.setSearchQuery("New York");
         String mockedResponse = "{\"data\":[]}"; // Mocked JSON response
@@ -80,7 +80,7 @@ public class TripadvisorServiceTest {
     }
 
     @Test
-    public void testGetLocationById() {
+    void testGetLocationById() {
         String locationId = "123";
         String expectedName = "New York";
         String mockedResponse = "{\"location_id\": \"123\", \"name\": \"New York\"}";
@@ -93,6 +93,36 @@ public class TripadvisorServiceTest {
         LocationDTO locationDTO = tripadvisorService.getLocationById(locationId);
 
         assertEquals(expectedName, locationDTO.getName());
+    }
+
+    @Test
+    void testGetLocationPhotosById() throws JsonProcessingException {
+        String locationId = "123";
+        String mockedResponse = "{\"data\":null}"; // Mocked JSON response
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> responseEntity = ResponseEntity.ok().body(mockedResponse);
+        when(restTemplate.exchange(any(String.class), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
+                .thenReturn(responseEntity);
+
+        LocationPhotosDTO locationPhotosDTO = tripadvisorService.getLocationPhotosById(locationId);
+
+        assertEquals(mockedResponse, new ObjectMapper().writeValueAsString(locationPhotosDTO));
+    }
+
+    @Test
+    void testGetLocationReviewsById() throws JsonProcessingException {
+        String locationId = "123";
+        String mockedResponse = "{\"data\":null}";
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> responseEntity = ResponseEntity.ok().body(mockedResponse);
+        when(restTemplate.exchange(any(String.class), any(HttpMethod.class), any(HttpEntity.class), any(Class.class)))
+                .thenReturn(responseEntity);
+
+        LocationReviewsDTO locationReviewsDTO = tripadvisorService.getLocationReviewsById(locationId);
+
+        assertEquals(mockedResponse, new ObjectMapper().writeValueAsString(locationReviewsDTO));
     }
 
 }
